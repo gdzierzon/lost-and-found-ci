@@ -1,0 +1,216 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-11-22T00:00:00Z",
+  "__export_source": "ask-codey:exercise",
+  "resources": [
+    {
+      "_id": "wrk_lost_and_found",
+      "_type": "workspace",
+      "parentId": null,
+      "name": "Lost and Found CI",
+      "description": "Exercise: Lost and Found CI. Start the server first, then send the requests in order; each one's description says what to expect. If your server runs at another address, change base_url in the Base Environment.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_lost_and_found_base",
+      "_type": "environment",
+      "parentId": "wrk_lost_and_found",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3100"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 0
+    },
+    {
+      "_id": "jar_lost_and_found",
+      "_type": "cookie_jar",
+      "parentId": "wrk_lost_and_found",
+      "name": "Default Jar",
+      "cookies": []
+    },
+    {
+      "_id": "req_lost_and_found_100",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "1. Every item",
+      "description": "Expect: 200.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/items",
+      "body": {},
+      "headers": [],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 100,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_110",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "2. Only the items still waiting (1, 2 and 4)",
+      "description": "Expect: 200.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/items?status=waiting",
+      "body": {},
+      "headers": [],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 110,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_120",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "3. One item by its id",
+      "description": "Expect: 200.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/items/2",
+      "body": {},
+      "headers": [],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 120,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_130",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "4. An item that doesn't exist",
+      "description": "Expect: 404.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/items/99",
+      "body": {},
+      "headers": [],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 130,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_140",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "5. Claim item 1",
+      "description": "Expect: 201, and item 1 is now claimed.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/items/1/claims",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{ \"name\": \"Jordan\" }"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 140,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_150",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "6. Claim an item that's already claimed",
+      "description": "Expect: 409.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/items/3/claims",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{ \"name\": \"Jordan\" }"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 150,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_160",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "7. A claim with no name",
+      "description": "Expect: 400.",
+      "method": "POST",
+      "url": "{{ _.base_url }}/items/2/claims",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 160,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_lost_and_found_170",
+      "_type": "request",
+      "parentId": "wrk_lost_and_found",
+      "name": "8. An address the API doesn't know",
+      "description": "Expect: 404.",
+      "method": "GET",
+      "url": "{{ _.base_url }}/lockers",
+      "body": {},
+      "headers": [],
+      "parameters": [],
+      "authentication": {},
+      "metaSortKey": 170,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    }
+  ]
+}
