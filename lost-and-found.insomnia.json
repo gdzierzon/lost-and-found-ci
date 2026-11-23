@@ -21,9 +21,7 @@
         "base_url": "http://localhost:3100"
       },
       "dataPropertyOrder": {
-        "&": [
-          "base_url"
-        ]
+        "&": ["base_url"]
       },
       "color": null,
       "isPrivate": false,
